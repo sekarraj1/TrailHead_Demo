@@ -1,0 +1,10 @@
+<aura:event type="COMPONENT" description="Event template">
+    <aura:attribute name="street" type="string" />
+    <aura:attribute name="city" type="string" />
+    <aura:attribute name="zip" type="string" />
+    <aura:attribute name="county" type="string" />
+    <aura:attribute name="state" type="Id" />
+    <aura:attribute name="lstnSource" type="string" />
+    <aura:attribute name="lstnScenario" type="string" />
+    <aura:attribute name="lstnDate" type="date" />
+</aura:event>

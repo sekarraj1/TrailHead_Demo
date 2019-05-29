@@ -1,0 +1,42 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" 
+                controller="SortableAccountTableController"
+                access="global" >
+	
+   <!--aura attributes--> 
+    <aura:attribute name="contactColumns" type="List"/>
+    <aura:attribute name="contactData" type="Object"/>
+    <aura:handler event="c:ContactListEvent" action="{!c.handleApplicationEventFired}"/>
+    <aura:attribute name="showContact" type="Boolean" default="false"/>
+    <aura:attribute name="Name" type="String" />
+	<!--Page header-->
+    <aura:if isTrue="{!!empty(v.contactData)}">
+    
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th class="" scope="col">
+        <span class="slds-text-heading_medium"> {!v.contactData[0].Account.Name}</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+      <aura:iteration items="{!v.contactData}" var="cont">
+         
+      	<tr class="slds-hint-parent">
+          <td data-label="Account Name">
+            <div class="slds-truncate" title="Cloudhub">
+              <a href="javascript:void(0);" tabindex="-1">{!cont.Name}</a>
+            </div>
+          </td>
+            <td data-label="Contact Name">
+            <div class="slds-truncate" title="Cloudhub">
+             <button type="button" onclick="{!c.showContactModal}" id="{!cont.Id}">GetContacts</button> 
+            </div>
+          </td>
+        </tr>
+      </aura:iteration>
+    
+  </tbody>
+</table>
+        </aura:if>
+</aura:component>

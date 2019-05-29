@@ -1,0 +1,76 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="CreateCandidateController">
+    
+    <aura:registerEvent name="moveToValidate" type="c:ChangeToValidateScreen"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:attribute name="apn" type="String" default=""/>
+	<aura:attribute name="county" type="String" default=""/>
+    <aura:attribute name="state" type="ID"/>
+    <aura:attribute name="selectedLookUpRecord" type="sObject"/>
+    <aura:attribute name="street1" type="String"/>
+    
+    <aura:attribute name="street" type="string" default=""/>
+    <aura:attribute name="city" type="string" default=""/>
+    <aura:attribute name="zip" type="string" default=""/>
+    
+    <aura:attribute name="ListingSource" type="String" />
+    <aura:attribute name="ListingScenario" type="String" />
+	<aura:attribute name="listingDate" type="Date" />
+    
+    
+    <aura:attribute name="zipValid" type="Boolean" default="false"/>
+    
+    <div class="slds" style="height: 100%;">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-modal__close" title="Close" 
+                                onclick="{!c.closeMe}">
+                            <lightning:icon class="white slds-icon_small" iconName="utility:close"/> 
+                            <span class="slds-assistive-text">Close</span>
+                   	</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"><b>New Opportunity</b></h2>
+                </header>
+            	<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+				<label style="font-family: Helvetica; font-size:16px;color:#000000;">
+                    Please enter the address for the APN  <b>{!v.apn}</b></label><br/><br/>
+					
+                   
+                    <label class="slds-form-element__label" style="font-family: Helvetica; font-weight: bold">
+                        <abbr class="slds-required" title="required">*</abbr>Street</label>
+                        <ui:inputText aura:id="street" placeholder="Street Address" required="true"  value="{!v.street}"/>
+					<label class="slds-form-element__label" style="font-family: Helvetica; font-weight: bold">
+                        <abbr class="slds-required" title="required">*</abbr>City</label>
+                        <ui:inputText aura:id="city" placeholder="City" required="true"  value="{!v.city}"/>
+					<label class="slds-form-element__label"  style="font-family: Helvetica; font-weight: bold">
+                        <abbr class="slds-required" title="required">*</abbr>Zip Code</label>
+                        <ui:inputText aura:id="zip" placeholder="Zip" required="true"  value="{!v.zip}" />
+                    <label class="slds-form-element__label"  style="font-family: Helvetica; font-weight: bold">
+                        <abbr class="slds-required" title="required">*</abbr>County</label>
+                        <ui:inputText aura:id="county" required="true" placeholder="County" value="{!v.county}" disabled="true"/>
+                    <!--<c:customLookup objectAPIName="state__c" label="State" IconName="standard:location" selectedRecord="{!v.selectedLookUpRecord}"/> -->
+					<br/><br/>
+                    <label style="font-family: Helvetica; font-size:16px;color:#000000;">
+                   Please enter the following information: </label><br/><br/>
+                   <label class="slds-form-element__label"  style="font-family: Helvetica; font-weight: bold">
+                       <abbr class="slds-required" title="required">*</abbr>Listing Source</label>
+                   <ui:inputSelect aura:id="ListingSourceDynamic" value="{!v.ListingSource}" /><br/>
+                   <label class="slds-form-element__label"  style="font-family: Helvetica; font-weight: bold">
+                       <abbr class="slds-required" title="required">*</abbr>Listing Activity</label>
+                    <ui:inputSelect aura:id="ListingScenarioDynamic" value="{!v.ListingScenario}" /><br/>
+                   <label class="slds-form-element__label"  style="font-family: Helvetica; font-weight: bold">
+                       <abbr class="slds-required" title="required">*</abbr>Listing Activity Date</label>
+                    <ui:inputDate aura:id="listDate" value="{!v.listingDate}" displayDatePicker="true"/><br/>
+
+                    
+                    </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick="{!c.closeMe}">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick="{!c.validateCandidate}">Validate Address</button>
+                </footer>
+            </div>
+        </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+        <div aura:id="ModalDialogPlaceholder" /> 
+    </div>
+</aura:component>

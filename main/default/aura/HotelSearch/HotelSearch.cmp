@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	<aura:handler name="formsubmit" event="c:formsubmit" action="{!c.onFormSubmit}" />
+	 <lightning:card title="Find a Boat" class="custom-margin-bottom-10">
+         <c:HotelSearchForm />
+    </lightning:card>
+    
+    <lightning:card title="Matching Hotels">
+         <c:HotelSearchResults aura:id="cmpHotelSearchResults"/>
+    </lightning:card>
+</aura:component>

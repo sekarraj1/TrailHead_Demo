@@ -1,0 +1,14 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	<aura:attribute name="hotel" type="Hotel__c" access="global"/>
+    <aura:attribute name="selected" type="boolean" access="global" default="false" />
+    <aura:registerEvent name="onHotelSelect" type="c:HotelSelect" description="component event for Hotel selected action"/>
+    <aura:registerEvent name="HotelSelected" type="c:HotelSelected" description="Application event for Hotel selected action"/>
+    <aura:registerEvent name="PlotMapMarker" type="c:PlotMapMarker" />
+    <lightning:button class="{!v.selected ? 'tile selected' : 'tile' }" onclick="{!c.onHotelClick}">
+        <div style="{!'background-image: url(' + v.hotel.Picture__c + ')'}" class="innertile">
+            <div class="lower-third">
+                <h1 class="slds-truncate">{!v.hotel.Name}</h1>
+            </div>
+        </div>
+    </lightning:button>
+</aura:component>

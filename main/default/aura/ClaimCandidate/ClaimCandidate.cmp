@@ -1,0 +1,45 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="candidateAPN" type="String"/>
+    <aura:attribute name="ListingSource" type="String" />
+    <aura:attribute name="ListingScenario" type="String" />
+    <aura:attribute name="opp" type="Acq_Opportunity__c"/>
+    <aura:attribute name="listingDate" type="Date" />
+    <aura:handler name="change" value="{!v.listingDate}" action="{!c.handleValueChange}"/>
+    <div class="slds">
+    <section class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+        <header class="slds-modal__header">
+            <button class="slds-button slds-modal__close" title="close" onclick="{!c.closeMe}">
+                <lightning:icon class="white slds-icon_small" iconName="utility:close"/>
+                <span class="slds-assistive-text">Close</span>
+            </button>
+			<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+            Please verify the information below
+            </h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" height="1200px">
+            <label style="font-family:Helvetica; font-size:15px;color:#228B22;">
+               APN to Claim:</label>&nbsp;&nbsp;&nbsp;&nbsp; <b>{#v.candidateAPN}</b>
+                <br/>
+                <label style="font-family: Helvetica; font-size:15px;color:#228B22;">
+                Address for the APN:</label> &nbsp;&nbsp;&nbsp;&nbsp;<b>{!v.opp.Address__r.Street__c}, {!v.opp.Address__r.City__c}, {!v.opp.Address__r.Zip__c}, {!v.opp.Address__r.State__r.Name}</b>
+                    <br/>
+                    <br/>
+               <label style="font-family: Helvetica; font-weight: bold;font-size:17px;color:#8B0000;">
+                   Please enter the following information: </label><br/><br/>
+                   <label class="slds-form-element__label"  style="font-family: Helvetica; font-weight: bold">
+                       <abbr class="slds-required" title="required">*</abbr>Listing Source</label>
+                   <ui:inputSelect aura:id="ListingSourceDynamic" value="{!v.ListingSource}" /><br/>
+                   <label class="slds-form-element__label"  style="font-family: Helvetica; font-weight: bold">
+                       <abbr class="slds-required" title="required">*</abbr>Listing Activity</label>
+                    <ui:inputSelect aura:id="ListingScenarioDynamic" value="{!v.ListingScenario}" /><br/>
+                   <label class="slds-form-element__label"  style="font-family: Helvetica; font-weight: bold">
+                       <abbr class="slds-required" title="required">*</abbr>Listing Activity Date</label>
+                    <ui:inputDate aura:id="listDate" value="{!v.listingDate}" displayDatePicker="true"/><br/>
+
+            </div>
+        </div>
+        </section>
+    </div>
+</aura:component>

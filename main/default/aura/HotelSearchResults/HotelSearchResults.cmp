@@ -1,0 +1,22 @@
+<aura:component controller="HotelSearchController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	<aura:attribute name="hotels" type="Hotel__c[]" access="private"/>
+    <aura:attribute name="selectedHotelId" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="onHotelSelect" event="c:HotelSelect" action="{!c.onHotelSelect}" />
+    <aura:method name="search" action="{!c.doSearch}" access="global" description="search the Hotels based on the requirement" >
+        <aura:attribute name="hotelTypeId" type="String" />
+    </aura:method>
+    <lightning:layout multipleRows="true">
+        <aura:iteration items="{!v.hotels}" var="hotel">
+            <lightning:layoutItem size="4" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="4" padding="around-small">
+               <c:HotelTile hotel="{!hotel}" selected="{!hotel.Id == v.selectedHotelId ? false : true}"/>
+            </lightning:layoutItem>
+        </aura:iteration>
+        <aura:if isTrue="{!v.hotels.length eq 0}">
+            <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" padding="around-small" class="slds-align_absolute-center">
+                <lightning:formattedText value="No Hotels found" />
+            </lightning:layoutItem>
+        </aura:if>
+        
+    </lightning:layout>
+</aura:component>

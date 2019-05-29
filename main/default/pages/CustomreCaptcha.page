@@ -1,0 +1,30 @@
+<apex:page sidebar="false" showHeader="false">
+    <html>
+      <head>
+        <title>reCAPTCHA: Explicit render after an onload callback</title>
+        <script type="text/javascript">
+          var verifyCallback = function(response) {
+              //URL where the Lightning Component is present
+              parent.postMessage("Unlock", "https://tstcommuniyt-developer-edition.ap8.force.com");
+          };
+          //Change the site key which you will get after registering on the Google for reCaptcha
+          var onloadCallback = function() {
+              grecaptcha.render('html_element', {
+                  'sitekey' : '6LcJB2EUAAAAAExofzcG7LIdphybfiV7dDdKIn0E',
+                  'callback' : verifyCallback,
+              });
+          };
+
+        </script>
+      </head>
+      <body>
+        <form action="?" method="POST">
+          <div id="html_element"></div>
+            <br/>
+            <input type="submit" value="Submit" style="display:none"/>
+        </form>
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async="" defer="">
+        </script>
+      </body>
+    </html>
+</apex:page>

@@ -1,0 +1,51 @@
+<aura:component controller="addChildController" Implements="flexipage:availableForRecordHome,force:hasRecordId">
+    <!-- init aura:handler action[doInit] auto call on component load -->  
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+   <!--TEsting-->
+ 
+  <!-- 1."ChildRecordList" attibute store the list of child record. --> 
+    <aura:attribute name="ChildRecordList" type="List" />
+    
+    <!--Use a data table from the Lightning Design System:
+    https://www.lightningdesignsystem.com/components/data-tables/ -->
+    
+    <div class="slds-m-around--x-small">
+        
+        <div class="slds-grid slds-grid--align-end slds-m-around--x-small">
+          <button class="slds-button slds-button--brand" onclick="{!c.addSelected}">Add Records</button>
+        </div>
+        
+        <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+            <thead>
+                <tr class="slds-text-heading--label">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Email">Email</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Select">Select</div>
+                    </th>
+                </tr>
+            </thead>
+ 
+            <tbody>
+               <!-- Iterate all child record list in table format -->  
+                <aura:iteration items="{!v.ChildRecordList}" var="rec">
+                    <tr>
+                        <td>
+                            <div class="slds-truncate" title="{!rec.Name}">{!rec.Name}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate" title="{!rec.Email}">{!rec.Email}</div>
+                        </td>
+                        <td>
+                            <ui:inputCheckbox aura:id="checkBox" text="{!rec.Id}" />
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

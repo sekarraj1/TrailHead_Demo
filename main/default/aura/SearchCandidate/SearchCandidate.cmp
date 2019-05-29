@@ -1,0 +1,56 @@
+<aura:component controller="SearchCandidateController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:dependency resource="markup://c:ClaimCandidate"/>
+    <aura:dependency resource="markup://c:ModalDialog" />
+    <aura:dependency resource="markup://c:CreateNewCandidate" />
+    <aura:attribute name="hostUrl" type="String" default=""/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="moveToValidate" event="c.ChangeToValidateScreen" action="{!c.handleEvent}" includeFacets="true"/>
+    <aura:attribute name="candidateAPN" type="String" default=""/>
+    <aura:attribute name="street" type="String" default=""/>
+    <aura:attribute name="city" type="String" default=""/>
+    <aura:attribute name="zip" type="String" default=""/>
+    <aura:attribute name="selectedLookUpRecord" type="List" />
+    <aura:attribute name="selectedValue" type="String" />
+    <aura:attribute name="selectedCounty" type="String" />
+    <aura:attribute name="disabledPick" type="Boolean" default="true"/>
+    <aura:attribute name="candidateCounty" type="List"/>
+    <aura:attribute name="parentOptions" type="List"/>
+    <aura:attribute name="dependentPicklist" type="Object"/>
+    <aura:attribute name="dependentOptions" type="List"/>
+    <aura:attribute name="stateId" type="String"  default=""/>
+    <div class="slds">
+        <div class="slds-text-align_left slds-text-heading_medium">
+            <label style="font-family: Helvetica;font-weight: bold; font-size:18px;color:#000000;">
+            Check Opportunity Availability
+            </label>
+        </div>
+        <br></br>
+        <div style="font-family: Helvetica;font-weight: bold; font-size:16px;color:#8B0000;">
+            <lightning:input aura:id="apn" name="capn" label="APN" value="{!v.candidateAPN}" required="true" class="slds-size--1-of-1 slds-p-horizontal_x-small"/>
+        	<div class="slds-size--1-of-1 slds-p-horizontal_x-small">
+                <lightning:select name="parentPicklist"  label="State" required="true" value="{!v.selectedValue}" aura:id="parentPicklist" onchange="{!c.getCounty}">
+                    <option value="">Select State</option>
+                    <aura:iteration items="{!v.selectedLookUpRecord}" var="st">
+                        <option value="{!st.Name}" selected="{!st.selected}">{!st.Name}</option>
+                    </aura:iteration>
+                </lightning:select>
+            
+            </div>
+            <div class="slds-size--1-of-1 slds-p-horizontal_x-small">
+                <lightning:select aura:id="county" name="capn" required="true" value="{!v.selectedCounty}" label="County" disabled="{!v.disabledPick}">
+                <option value="">Select County</option>
+                <aura:iteration items="{!v.candidateCounty}" var="c">
+                    <option value="{!c.Name}" selected="{!c.selected}">{!c.Name}</option>
+                </aura:iteration>
+            </lightning:select>
+            </div>
+        </div>
+        <br></br>
+        <div>
+            <iframe src="/brokerService/apex/CustomreCaptcha" style="border:1px" width="400px" height="100px"/>
+            <lightning:button aura:id="checkButton" class="slds-button slds-button_brand slds-float--right" label="CHECK OPPORTUNITY"
+                              onclick="{!c.doCreateRecord}"/>
+        </div>
+        <div aura:id="ModalDialogPlaceholder"/>
+    </div>
+</aura:component>

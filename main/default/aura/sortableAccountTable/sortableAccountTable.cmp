@@ -1,0 +1,46 @@
+<aura:component controller="SortableAccountTableController" implements="force:appHostable,flexipage:availableForAllPageTypes">
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+   <!--aura attributes--> 
+    <aura:attribute name="accountColumns" type="List"/>
+    <aura:attribute name="accountData" type="Object"/>
+    <aura:attribute name="sortBy" type="String"/>
+    <aura:attribute name="sortDirection" type="String"/>
+    <aura:attribute name="showContact" type="Boolean" default="false"/>
+    <aura:registerEvent name="contactListEvent" type="c:ContactListEvent"/>
+    <!--Page header-->
+    <div class="slds-page-header" role="banner">
+        <span class="slds-text-heading_medium">Accounts List</span>
+        <span class="slds-page-header__title">Top 50 Accounts</span>
+    </div>
+    
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th class="" scope="col">
+        <div class="slds-truncate" title="Account Name">Account Name</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+      <aura:iteration items="{!v.accountData}" var="acc">
+      	<tr class="slds-hint-parent">
+          <td data-label="Account Name">
+            <div class="slds-truncate" title="Cloudhub">
+              <a href="javascript:void(0);" tabindex="-1">{!acc.Name}</a>
+            </div>
+          </td>
+            <td data-label="Account Name">
+            <div class="slds-truncate" title="Cloudhub">
+             <button type="button" onclick="{!c.showCaseDeleteModal}" id="{!acc.Id}">Get Relevant Contacts</button> 
+            </div>
+          </td>
+        </tr>
+      </aura:iteration>
+    
+  </tbody>
+</table>
+     
+    
+   
+    
+</aura:component>
