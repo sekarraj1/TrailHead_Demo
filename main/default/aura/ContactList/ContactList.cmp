@@ -2,7 +2,7 @@
                 controller="SortableAccountTableController"
                 access="global" >
 	
-   <!--aura attributes--> 
+   <!--aura attributes for tersting--> 
     <aura:attribute name="contactColumns" type="List"/>
     <aura:attribute name="contactData" type="Object"/>
     <aura:handler event="c:ContactListEvent" action="{!c.handleApplicationEventFired}"/>
