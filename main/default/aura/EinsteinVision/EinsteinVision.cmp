@@ -1,5 +1,5 @@
 <aura:component implements="force:appHostable" access="global" controller="EinsteinVisionController">
-    
+    <!-- Testing dev-->
     <aura:attribute name="modelId" type="String"/>
     <aura:attribute name="files" type="Object[]"/>
     <aura:attribute name="predictions" type="Object[]"/>
