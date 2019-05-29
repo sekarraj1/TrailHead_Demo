@@ -1,7 +1,7 @@
 <aura:component controller="addChildController" Implements="flexipage:availableForRecordHome,force:hasRecordId">
     <!-- init aura:handler action[doInit] auto call on component load -->  
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
-   <!--TEsting-->
+   <!--Testing GitHUb-->
  
   <!-- 1."ChildRecordList" attibute store the list of child record. --> 
     <aura:attribute name="ChildRecordList" type="List" />
